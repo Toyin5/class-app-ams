@@ -8,7 +8,6 @@ import { Toast, ToastProps } from "../components/Toast";
 import { ServiceResponse, api } from "../utils/Axios";
 import apiUrls from "../utils/apiUrls";
 import { Loader } from "../components/Loader";
-import useLocalStorage from "../hooks/useLocalStorage";
 
 interface OnboardingData {
   firstName: string;
@@ -22,7 +21,6 @@ interface OnboardingData {
 const Onboarding: React.FC = () => {
   const [searchParams, _] = useSearchParams();
   const [loading, setLoading] = useState(false);
-  const [user, _1] = useLocalStorage<{}>("user", {});
   const [toast, setToast] = useState<ToastProps>({
     isVisible: false,
     message: "",
@@ -52,9 +50,6 @@ const Onboarding: React.FC = () => {
   useEffect(() => {
     if (!userId) {
       window.location.href = "/";
-    }
-    if (user) {
-      window.location.href = "/dashboard";
     }
   }, []);
   const [formData, setFormData] = useState<OnboardingData>({
